@@ -1,0 +1,236 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <style>
+            body{
+                background-color: #E3B7A0;
+            }
+            .form-group{
+                padding-left: 20px;
+                padding-right: 20px;
+                /* margin: 20px; */
+                width: 500px;
+             }
+            form{
+                /* text-align: center; */
+                width: 600px;
+                background-color:beige;
+                height: 600px;
+                justify-content: center;
+                margin: 20px;
+                margin-left: 350px;
+                border-radius: 20px;
+                padding: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-inverse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/register">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="form">
+          <form action="/register_task">
+            <center><h1>Registration Form</h1></center>
+            <div class="form-group pt-5">
+                <input  id="name" type="text" name="name" onkeyup="validateName()"class="form-control" placeholder="Enter Your Name" autocomplete="off">
+                <small id="nameError"></small>
+            </div>
+            <div class="form-group">
+                <input id="fname" type="text" name="fname" onkeyup="validateFName()"class="form-control" placeholder="Enter Your Father Name" autocomplete="off">
+                <small id="fnameError"></small>
+            </div>
+           
+            <div class="form-group">
+                <input type="text" id="age" name="age" onkeyup="validateAge()" class="form-control" placeholder="Enter Age" autocomplete="off">
+                <small id="ageError"></small>
+            </div>
+            <div class="form-group">
+                <input id="email" type="text" name="email" onkeyup="validateEmail()" class="form-control" placeholder="Enter your Email" autocomplete="off">
+                <small id="emailError"></small>
+            </div>
+            <div class="form-group">
+                Female &nbsp;<input id="female" name="gender" type="radio" name="gender" value="female">&nbsp;&nbsp;
+                Male &nbsp;<input id="male" type="radio" name="gender" value="male">&nbsp;&nbsp;
+                Other &nbsp;<input id="other" type="radio" name="gender" value="others">
+                <br><small id="genderError"></small>
+            </div>
+
+            <div class="form-group">
+                <select name="country" class="form-control" name="conutry" id="country" onchange="validateCountry()">
+                    <option value="0">Select Country</option>
+                    <option value="Afghanistan">Afghanistan</option>
+                    <option value="China">China</option>
+                    <option value="India">India</option>
+                    <option value="Nepal">Nepal</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="Sri Lanka">Sri Lanka</option>
+                </select>
+                <small id="countryError"></small>
+            </div> 
+            <div class="form-group">
+                <input id="pass" name="pass" type="password" onkeyup="validatePass()" class="form-control" placeholder="Enter Password" autocomplete="off">
+                <small id="passError"></small>
+            </div>
+            <input id="submit" onclick="return validateData()" type="submit" value="submit" style="margin-left: 50px;">
+        </form> 
+    </div>
+    </body>
+    <script>
+      function validateCountry(){
+          var country = document.getElementById("country").value;
+          var countryError = document.getElementById("countryError");
+          var status = true;
+          if(country==0){
+              status=false;
+              countryError.innerHTML = "Please Select Country";
+              countryError.style.color = "red";
+             }
+          else
+             countryError.innerHTML ="";
+          return status;
+      }
+      function validateName(){
+          var status=true;
+          var name = document.getElementById("name").value;
+          var nameError = document.getElementById("nameError");
+
+          if(name==""){
+              status = false;
+              nameError.innerHTML = "Please Enter Name";
+              nameError.style.color = "red";
+          }
+          else if(name.length<2){
+              status = false;
+              nameError.innerHTML = "Please Enter Name of atleast 2 character";
+              nameError.style.color = "red";
+          }
+          else 
+              nameError.innerHTML="";
+          return status;
+      }
+      function validateFName(){
+          var status=true;
+          var fname = document.getElementById("fname").value;
+          var fnameError = document.getElementById("fnameError");
+
+          if(fname==""){
+              status = false;
+              fnameError.innerHTML = "Please Enter Father Name";
+              fnameError.style.color = "red";
+          }
+          else if(fname.length<2){
+              status = false;
+              fnameError.innerHTML = "Please Enter Name of atleast 2 character";
+              fnameError.style.color = "red";
+          }
+          else 
+              fnameError.innerHTML="";
+          return status;
+      }
+
+      function validatePass(){
+          var status=true;
+          var pass = document.getElementById("pass").value;
+          var passError = document.getElementById("passError");
+
+          if(pass==""){
+              status = false;
+              passError.innerHTML = "Please Enter Password";
+              passError.style.color = "red";
+          }
+          else if(pass.length<4 || pass.length>10){
+              status = false;
+              passError.innerHTML = "Please Enter password between 4-10 character";
+              passError.style.color = "red";
+          }
+          else 
+              passError.innerHTML="";
+          return status;
+      }
+      function validateAge(){
+          var status=true;
+          var age = document.getElementById("age").value;
+          var ageError = document.getElementById("ageError");
+
+          if(age==""){
+              status = false;
+              ageError.innerHTML = "Please Enter Age";
+              ageError.style.color = "red";
+          }
+          else if(parseInt(age)>100 || parseInt(age)<0){
+              status = false;
+              ageError.innerHTML = "Please Enter valid age";
+              ageError.style.color = "red";
+          }
+          else 
+              ageError.innerHTML="";
+          return status;
+      }
+      function validateEmail(){
+          var status = true;
+          var email = document.getElementById("email").value;
+          var emailError = document.getElementById("emailError");
+
+          var regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+          
+          if(email==""){
+              status = false;
+              emailError.innerHTML = "please Enter Email Id";
+              emailError.style.color = "red";
+          }
+          else if(!(regex.test(email))){
+              status = false;
+              emailError.innerHTML = "please Enter valid Email Id";
+              emailError.style.color = "red";
+          }
+          else    
+              emailError.innerHTML = "";
+          return status;
+      }
+      function validateGender(){
+          status = true;
+          var female = document.getElementById('female').checked;
+          var male = document.getElementById("male").checked;
+          var other = document.getElementById("other").checked;
+          var genderError = document.getElementById("genderError");
+          console.log(male + " " + female + " " + " " + other);
+          if(!(female || male || other)){
+              status=false;
+              genderError.innerHTML = "Please Select Gender";
+              genderError.style.color="red";
+          }
+          return status;
+      }
+      function validateData(){
+          var status = true;
+          var nameStatus = validateName();
+          var fnameStatus = validateFName();
+          var passStatus = validatePass();
+          var ageStatus = validateAge();
+          var emailStatus = validateEmail();
+          var genderStatus = validateGender();
+          var countryStatus = validateCountry();
+
+          if(nameStatus && fnameStatus && passStatus && ageStatus && emailStatus && genderStatus && countryStatus){
+              return true
+          }
+          return false;
+      }
+  </script>
+</html>

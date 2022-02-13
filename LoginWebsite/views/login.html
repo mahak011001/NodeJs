@@ -1,0 +1,124 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #E3B7A0;
+    }
+
+    .form-group {
+      padding-left: 20px;
+      padding-right: 20px;
+      /* margin: 20px; */
+      width: 500px;
+    }
+
+    form {
+      /* text-align: center; */
+      width: 600px;
+      background-color: beige;
+      height: 300px;
+      justify-content: center;
+      margin: 20px;
+      margin-left: 350px;
+      border-radius: 20px;
+      padding: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-inverse">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/register">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="form">
+    <form action="/login_task">
+      <center>
+        <h1>Login Form</h1>
+      </center>
+      <div class="form-group pt-5">
+      <div class="form-group">
+        <input id="email" type="text" name="email" onkeyup="validateEmail()" class="form-control"
+          placeholder="Enter your Email" autocomplete="off">
+        <small id="emailError"></small>
+      </div>
+      <div class="form-group">
+        <input id="pass" name="pass" type="password" onkeyup="validatePass()" class="form-control"
+          placeholder="Enter Password" autocomplete="off">
+        <small id="passError"></small>
+      </div>
+      <input id="submit" onclick="return validateData()" type="submit" value="submit" style="margin-left: 50px;">
+    </form>
+
+</body>
+<script>
+  function validatePass() {
+    var status = true;
+    var pass = document.getElementById("pass").value;
+    var passError = document.getElementById("passError");
+
+    if (pass == "") {
+      status = false;
+      passError.innerHTML = "Please Enter Password";
+      passError.style.color = "red";
+    }
+    else if (pass.length < 4 || pass.length > 10) {
+      status = false;
+      passError.innerHTML = "Please Enter password between 4-10 character";
+      passError.style.color = "red";
+    }
+    else
+      passError.innerHTML = "";
+    return status;
+  }
+  function validateEmail() {
+    var status = true;
+    var email = document.getElementById("email").value;
+    var emailError = document.getElementById("emailError");
+
+    var regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+
+    if (email == "") {
+      status = false;
+      emailError.innerHTML = "please Enter Email Id";
+      emailError.style.color = "red";
+    }
+    else if (!(regex.test(email))) {
+      status = false;
+      emailError.innerHTML = "please Enter valid Email Id";
+      emailError.style.color = "red";
+    }
+    else
+      emailError.innerHTML = "";
+    return status;
+  }
+  function validateData() {
+    var status = true;
+    var passStatus = validatePass();
+    var emailStatus = validateEmail();
+
+    if (passStatus && emailStatus) {
+      return true
+    }
+    return false;
+  }
+</script>
+
+</html>
